@@ -27,7 +27,7 @@
 
 ###
 
-<h4 align="left">🌟 Languages & Frameworks</h4>
+<h3 align="left">🌟 Languages & Frameworks</h3>
 
 ###
 
@@ -53,7 +53,7 @@
 
 ###
 
-<h4 align="left">🛠 Tools</h4>
+<h3 align="left">🛠 Tools</h3>
 
 ###
 
