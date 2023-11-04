@@ -13,8 +13,9 @@
 - 👨‍💻 I’m currently exploring various programming languages and frameworks, particularly PHP and the Laravel Framework.
 - 🎯 Goals : My aspiration is to become a successful programmer, continuously refining my skills, and contributing innovative solutions within the tech industry.
 - 🎲 Fun fact : I absolutely enjoy learning new things and constantly seek opportunities to broaden my knowledge.
+
 ###
-<br>
+<br clear="both">
 <div align="right">
   <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/medium/default.svg" width="30" height="25" alt="medium logo"  />
   <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="30" height="25" alt="instagram logo"  />
