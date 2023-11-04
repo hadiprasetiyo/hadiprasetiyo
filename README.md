@@ -95,4 +95,5 @@
   <img src="https://streak-stats.demolab.com?user=hadiprasetiyo&locale=en&mode=daily&theme=github_dark&hide_border=true&border_radius=5&order=3" height="165" alt="streak graph"  />
 </div>
 
-<img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=hadiprasetiyo.hadiprasetiyo&left_color=black&right_color=midnightblue&left_text=views"  />
+<img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=hadiprasetiyo&left_color=black&right_color=midnightblue&left_text=views" />
+
