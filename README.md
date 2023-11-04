@@ -103,10 +103,22 @@
 
 ###
 
+<h3 align="left">Connect with me :</h3>
+
+###
+
+<div align="left">
+  <a href="https://www.instagram.com/hadiiprasetiyo/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="30" height="25" alt="instagram logo" /></a>
+  <a href="https://discordapp.com/users/hadiiyok/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="30" height="25" alt="discord logo"  /></a>
+  <a href="https://hadiiyok.medium.com/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/medium/default.svg" width="30" height="25" alt="medium logo"  /></a>
+</div>
+
+###
+
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=hadiprasetiyo&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=false&count_private=true&disable_animations=false&theme=synthwave&locale=en&hide_border=true&order=1" height="150" alt="stats graph"  />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=hadiprasetiyo&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=6&theme=synthwave&hide_border=true&order=2" height="150" alt="languages graph"  />
-  <img src="https://streak-stats.demolab.com?user=hadiprasetiyo&locale=en&mode=daily&theme=synthwave&hide_border=true&border_radius=5&order=3" height="150" alt="streak graph"  />
+  <img src="https://github-readme-stats.vercel.app/api?username=hadiprasetiyo&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=false&count_private=true&disable_animations=false&theme=github_dark&locale=en&hide_border=true&order=1" height="150" alt="stats graph"  />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=hadiprasetiyo&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=6&theme=github_dark&hide_border=true&order=2" height="150" alt="languages graph"  />
+  <img src="https://streak-stats.demolab.com?user=hadiprasetiyo&locale=en&mode=daily&theme=github_dark&hide_border=true&border_radius=5&order=3" height="150" alt="streak graph"  />
 </div>
 
 ###
