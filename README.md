@@ -4,7 +4,7 @@
 
 <img width="100%" src="https://readme-typing-svg.herokuapp.com?font=VT323&size=21&pause=500&color=BF00FF&center=true&vCenter=true&random=false&width=500&height=30&lines=Hi+!;I'm+Hadi+Prasetiyo;Fullstack+Web+Developer;UI%2FUX+Designer" alt="Typing SVG" />
 
-## <h2 align="left">👤 About me</h2>
+<h2 align="left">👤 About me</h2>
 
 <img align="right" height="200" src="https://user-images.githubusercontent.com/74038190/235224431-e8c8c12e-6826-47f1-89fb-2ddad83b3abf.gif"  />
 
