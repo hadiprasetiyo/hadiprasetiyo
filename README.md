@@ -1,6 +1,6 @@
 ![MasterHead](https://github.com/hadiprasetiyo/hadiprasetiyo/blob/master/banner.gif)
 ###
-<img width="100%" src="https://readme-typing-svg.herokuapp.com?font=VT323&size=25&pause=500&color=BF00FF&center=true&vCenter=true&random=true&width=500&height=30&lines=Hi!;I'm+Hadi+Prasetiyo" alt="Typing SVG" />
+<img width="100%" src="https://readme-typing-svg.herokuapp.com?font=VT323&size=21&pause=500&color=BF00FF&center=true&vCenter=true&random=true&width=500&height=30&lines=Hi+!;I'm+Hadi+Prasetiyo" alt="Typing SVG" />
 
 ###
 <h2 align="left">About me</h2>
