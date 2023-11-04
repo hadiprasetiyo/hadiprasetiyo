@@ -1,4 +1,7 @@
-![MasterHead](https://github.com/hadiprasetiyo/hadiprasetiyo/blob/master/banner.gif)
+<div align="center">
+  <img height="400" src="https://github.com/hadiprasetiyo/hadiprasetiyo/blob/master/banner.gif" />
+</div>
+
 ###
 <img width="100%" src="https://readme-typing-svg.herokuapp.com?font=VT323&size=21&pause=500&color=BF00FF&center=true&vCenter=true&random=false&width=500&height=30&lines=Hi+!;I'm+Hadi+Prasetiyo;Fullstack+Web+Developer;UI%2FUX+Designer" alt="Typing SVG" />
 
@@ -24,7 +27,7 @@
 
 ###
 
-<h4 align="left">Languages & Framework</h4>
+<h4 align="left">🌟 Languages & Frameworks</h4>
 
 ###
 
@@ -50,7 +53,7 @@
 
 ###
 
-<h4 align="left">Tools</h4>
+<h4 align="left">🛠 Tools</h4>
 
 ###
 
