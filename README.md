@@ -98,9 +98,9 @@
 ## <h2 align="left">🌐 Connect with me :</h2>
 
 <div align="left">
-  <a href="https://www.instagram.com/hadiiprasetiyo/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="30" height="25" alt="instagram logo" /></a>
-  <a href="https://discordapp.com/users/hadiiyok/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="30" height="25" alt="discord logo"  /></a>
-  <a href="https://hadiiyok.medium.com/" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/medium/default.svg" width="30" height="25" alt="medium logo"  /></a>
+  <a href="https://www.instagram.com/hadiiprasetiyo/" target="blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="30" height="25" alt="instagram logo" /></a>
+  <a href="https://discordapp.com/users/hadiiyok/" target="blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="30" height="25" alt="discord logo"  /></a>
+  <a href="https://hadiiyok.medium.com/" target="blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/medium/default.svg" width="30" height="25" alt="medium logo"  /></a>
 </div>
 
 ##
