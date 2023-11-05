@@ -117,7 +117,5 @@
   <img alt="snake eating my contributions" src="https://raw.githubusercontent.com/hadiprasetiyo/hadiprasetiyo/output/github-contribution-grid-snake.svg" />
 </div>
 
-##
-
 <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=hadiprasetiyo&left_color=black&right_color=midnightblue&left_text=views" />
 
