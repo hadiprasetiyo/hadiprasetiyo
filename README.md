@@ -111,8 +111,6 @@
   <img src="https://streak-stats.demolab.com?user=hadiprasetiyo&locale=en&mode=daily&theme=github_dark&hide_border=true&border_radius=5&order=3" height="165" alt="streak graph"  />
 </div>
 
-##
-
 <div align="center">
   <img alt="snake eating my contributions" src="https://raw.githubusercontent.com/hadiprasetiyo/hadiprasetiyo/output/github-contribution-grid-snake.svg" />
 </div>
