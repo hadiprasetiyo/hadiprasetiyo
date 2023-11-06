@@ -95,7 +95,7 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/putty/putty-original.svg" height="25" alt="putty logo"  />
 </div>
 
-## <h2 align="left">🌐 Connect with me :</h2>
+## <h2 align="left">🌐 Connect with me</h2>
 
 <div align="left">
   <a href="https://www.instagram.com/hadiiprasetiyo" target="_blank"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="30" height="25" alt="instagram logo" /></a>
