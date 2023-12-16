@@ -15,7 +15,11 @@
 - 🎯 Goals : My aspiration is to become a successful programmer, continuously refining my skills, and contributing innovative solutions within the tech industry.
 - 🎲 Fun fact : I absolutely enjoy learning new things and constantly seek opportunities to broaden my knowledge.
 
-<br clear="both">
+<!--<br clear="both">-->
+
+## <h2 align="left"> :trophy: Git Trophies </h2>
+                                     
+<p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=hadiprasetiyo&layout=compact&theme=tokyonight&column=4&margin-w=15&margin-h=15" alt="hadiprasetiyo" /></a> </p>
 
 ## <h2 align="left">🌟 Languages</h2>
 
