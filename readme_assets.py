@@ -1,15 +1,43 @@
-"""Generator gambar pendukung README: judul section, kartu proyek, footer (folder assets/).
+"""Generator gambar pendukung README: judul section, kartu about/stack/proyek, footer (folder assets/).
 
-Ubah SECTIONS / PROJECTS lalu jalankan: python readme_assets.py
+Ubah ABOUT / STACK / PROJECTS / SECTIONS lalu jalankan: python readme_assets.py
+Ikon tech stack diunduh dari skillicons.dev saat generate lalu disematkan, jadi butuh internet.
 """
+import base64
 import random
 import textwrap
+import urllib.request
 from html import escape
 from pathlib import Path
 
 from pixelart import CAT_COLORS, CAT_POSES, pixels, sprite, width
 
 SECTIONS = {"about": "ABOUT", "stack": "TECH STACK", "projects": "FEATURED PROJECTS", "activity": "ACTIVITY"}
+ABOUT = {
+    "name": "Hadi Prasetiyo",
+    "role": "Full-Stack Software Engineer",
+    "bio": "I build web applications end to end, from the database schema and REST API to the interface "
+           "people actually click on. Most of my work uses Laravel, React and FastAPI, and I care about code "
+           "that is simple to read and easy to change.",
+    # (ikon, label, isi)
+    "facts": [("pin", "LOCATION", "Samarinda, Indonesia"),
+              ("cap", "EDUCATION", "Mulawarman University"),
+              ("prompt", "CURRENTLY", "Building with Laravel & React"),
+              ("sprout", "LEARNING", "Testing · CI/CD · System design")],
+}
+# (kategori, keterangan, [(id skillicons, label)])
+STACK = [
+    ("Languages", "The languages I write and think in.",
+     [("php", "PHP"), ("js", "JavaScript"), ("python", "Python"), ("java", "Java")]),
+    ("Frontend", "Responsive interfaces, from layout to motion.",
+     [("html", "HTML"), ("css", "CSS"), ("react", "React"), ("vite", "Vite"), ("tailwind", "Tailwind"), ("bootstrap", "Bootstrap")]),
+    ("Backend & Data", "APIs, business logic, and the data behind them.",
+     [("laravel", "Laravel"), ("nodejs", "Node.js"), ("express", "Express"), ("fastapi", "FastAPI"), ("mysql", "MySQL"),
+      ("postgres", "PostgreSQL")]),
+    ("Tools", "How I build, ship, and design.",
+     [("git", "Git"), ("github", "GitHub"), ("docker", "Docker"), ("postman", "Postman"), ("figma", "Figma"),
+      ("vscode", "VS Code"), ("linux", "Linux")]),
+]
 # (repo, deskripsi, stack, ada demo live?)
 PROJECTS = [
     ("portfolio-v2", "Personal portfolio with an animated UI and a secure contact form.",
@@ -26,12 +54,50 @@ OUT = Path("assets")
 ACCENT = "#8957e5"  # ungu tengah: tetap terbaca di tema terang maupun gelap
 LEVELS = ["#161b22", "#3c1e70", "#553098", "#8957e5", "#bc8cff"]
 UI_FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif"
+CARD_W, CARD_H = 420, 170  # kartu grid 2x2; kartu lebar = dua kartu + jarak antar gambar di README
+PIXEL_ICONS = {
+    "pin": ["..###..", ".#####.", ".##.##.", ".#####.", "..###..", "...#...", "...#..."],
+    "cap": ["...#...", ".#####.", "#######", ".#####.", "..###..", "..###..", "......."],
+    "prompt": ["#......", ".#.....", "..#....", ".#.....", "#..####", ".......", "......."],
+    "sprout": ["##...##", ".##.##.", "..###..", "...#...", "...#...", "..###..", ".#####."],
+}
+STYLE = f"""<style>
+.t{{font:600 19px {UI_FONT};fill:#d2a8ff}}
+.h{{font:600 26px {UI_FONT};fill:#e6edf3}}
+.r{{font:600 15px {UI_FONT};fill:#bc8cff}}
+.d{{font:14px {UI_FONT};fill:#8b949e}}
+.c{{font:12px {UI_FONT};fill:#c9d1d9}}
+.s{{font:11px {UI_FONT};fill:#8b949e}}
+.k{{font:600 11px {UI_FONT};fill:#7d8590;letter-spacing:.08em}}
+.v{{font:14px {UI_FONT};fill:#c9d1d9}}
+.l{{font:600 12px {UI_FONT};fill:#3fb950}}
+.tw{{animation:tw 4s ease-in-out infinite}}
+.tw:nth-of-type(2n){{animation-delay:-2s}}
+@keyframes tw{{50%{{fill:#bc8cff}}}}
+@media (prefers-reduced-motion:reduce){{*{{animation:none!important}}}}
+</style>"""
 random.seed(11)
 
 
 def pixel_text(text, x, y, px, fill):
     return "".join(f'<rect x="{x + c * px}" y="{y + r * px}" width="{px - 1}" height="{px - 1}" fill="{fill}"/>'
                     for c, r, _ in pixels(text))
+
+
+def cluster(x, y):
+    """Ikon 3x3 sel kontribusi; sebagian berkilau pelan."""
+    return "".join(f'<rect x="{x + c * 8}" y="{y + r * 8}" width="6" height="6" rx="1" fill="{random.choice(LEVELS[1:])}"'
+                   + (' class="tw"' if random.random() < 0.3 else "") + "/>" for r in range(3) for c in range(3))
+
+
+def card(w, h, label, body):
+    """Kartu gelap dasar yang dipakai semua kartu supaya seragam."""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{escape(label)}">
+{STYLE}
+<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+{body}
+</svg>
+"""
 
 
 def header(title):
@@ -53,40 +119,58 @@ def header(title):
 """
 
 
+def about_card():
+    """Kartu lebar: sapaan + bio di kiri, fakta singkat berikon pixel di kanan."""
+    w, h = CARD_W * 2 + 8, 224
+    bio = "".join(f'<text class="d" x="28" y="{122 + k * 21}">{escape(line)}</text>'
+                  for k, line in enumerate(textwrap.wrap(ABOUT["bio"], 62)[:4]))
+    facts = ""
+    for k, (icon, label, value) in enumerate(ABOUT["facts"]):
+        y = 30 + k * 46
+        facts += (sprite(PIXEL_ICONS[icon], {"#": "#bc8cff"}, 556, y + 3, px=2)
+                  + f'<text class="k" x="580" y="{y + 12}">{label}</text>'
+                  + f'<text class="v" x="580" y="{y + 32}">{escape(value)}</text>')
+    body = (cluster(28, 30)
+            + f'<text class="h" x="64" y="52">Hi, I\'m <tspan fill="#d2a8ff">{escape(ABOUT["name"])}</tspan></text>'
+            + f'<text class="r" x="28" y="88">{escape(ABOUT["role"])}</text>'
+            + bio
+            + f'<rect x="528" y="28" width="1" height="{h - 56}" fill="#21262d"/>'
+            + facts)
+    return card(w, h, f'{ABOUT["name"]}, {ABOUT["role"]}. {ABOUT["bio"]}', body)
+
+
+def fetch_icon(name):
+    request = urllib.request.Request(f"https://skillicons.dev/icons?i={name}", headers={"User-Agent": "readme-assets"})
+    return base64.b64encode(urllib.request.urlopen(request, timeout=30).read()).decode()
+
+
+def stack_card(category, note, items):
+    """Kartu kategori tech stack: ikon disematkan sebagai data URI supaya tidak bergantung layanan luar."""
+    slot = 376 / max(len(items), 6)
+    icons = "".join(f'<image x="{22 + k * slot:.1f}" y="94" width="36" height="36" href="data:image/svg+xml;base64,{fetch_icon(icon)}"/>'
+                    f'<text class="s" x="{40 + k * slot:.1f}" y="{CARD_H - 22}" text-anchor="middle">{escape(label)}</text>'
+                    for k, (icon, label) in enumerate(items))
+    body = (cluster(22, 22)
+            + f'<text class="t" x="58" y="43">{escape(category)}</text>'
+            + f'<text class="d" x="22" y="74">{escape(note)}</text>'
+            + icons)
+    return card(CARD_W, CARD_H, f"{category}: {', '.join(label for _, label in items)}", body)
+
+
 def project_card(repo, description, stack, live):
-    """Kartu proyek gelap senada banner; seluruh kartu ditautkan ke repo di README."""
-    w, h = 420, 170
-    icon = "".join(f'<rect x="{22 + c * 8}" y="{22 + r * 8}" width="6" height="6" rx="1" fill="{random.choice(LEVELS[1:])}"'
-                   + (' class="tw"' if random.random() < 0.3 else "") + "/>" for r in range(3) for c in range(3))
+    """Kartu proyek; seluruh kartu ditautkan ke repo di README."""
     lines = textwrap.wrap(description, 52)[:3]
     desc = "".join(f'<text class="d" x="22" y="{82 + k * 19}">{escape(line)}</text>' for k, line in enumerate(lines))
     chips, x = [], 22
     for tech in stack:
         chip_w = len(tech) * 6.4 + 18
-        chips.append(f'<rect x="{x}" y="{h - 40}" width="{chip_w:.0f}" height="22" rx="11" fill="#161b22" stroke="#30363d"/>'
-                     f'<text class="c" x="{x + chip_w / 2:.0f}" y="{h - 25}" text-anchor="middle">{escape(tech)}</text>')
+        chips.append(f'<rect x="{x}" y="{CARD_H - 40}" width="{chip_w:.0f}" height="22" rx="11" fill="#161b22" stroke="#30363d"/>'
+                     f'<text class="c" x="{x + chip_w / 2:.0f}" y="{CARD_H - 25}" text-anchor="middle">{escape(tech)}</text>')
         x += chip_w + 8
-    badge = (f'<circle cx="{w - 58}" cy="37" r="4" fill="#3fb950"/><text class="l" x="{w - 22}" y="41" text-anchor="end">Live</text>'
-             if live else "")
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{escape(repo)}: {escape(description)}">
-<style>
-.t{{font:600 19px {UI_FONT};fill:#d2a8ff}}
-.d{{font:14px {UI_FONT};fill:#8b949e}}
-.c{{font:12px {UI_FONT};fill:#c9d1d9}}
-.l{{font:600 12px {UI_FONT};fill:#3fb950}}
-.tw{{animation:tw 4s ease-in-out infinite}}
-.tw:nth-of-type(2n){{animation-delay:-2s}}
-@keyframes tw{{50%{{fill:#bc8cff}}}}
-@media (prefers-reduced-motion:reduce){{*{{animation:none!important}}}}
-</style>
-<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
-{icon}
-<text class="t" x="58" y="43">{escape(repo)}</text>
-{badge}
-{desc}
-{"".join(chips)}
-</svg>
-"""
+    badge = (f'<circle cx="{CARD_W - 58}" cy="37" r="4" fill="#3fb950"/>'
+             f'<text class="l" x="{CARD_W - 22}" y="41" text-anchor="end">Live</text>' if live else "")
+    body = cluster(22, 22) + f'<text class="t" x="58" y="43">{escape(repo)}</text>' + badge + desc + "".join(chips)
+    return card(CARD_W, CARD_H, f"{repo}: {description}", body)
 
 
 def footer():
@@ -126,7 +210,10 @@ def footer():
 OUT.mkdir(exist_ok=True)
 for key, title in SECTIONS.items():
     (OUT / f"header-{key}.svg").write_text(header(title), encoding="utf-8")
+(OUT / "about.svg").write_text(about_card(), encoding="utf-8")
+for category, note, items in STACK:
+    (OUT / f"stack-{category.split()[0].lower()}.svg").write_text(stack_card(category, note, items), encoding="utf-8")
 for project in PROJECTS:
     (OUT / f"project-{project[0].lower()}.svg").write_text(project_card(*project), encoding="utf-8")
 (OUT / "footer.svg").write_text(footer(), encoding="utf-8")
-print(f"{len(SECTIONS)} judul, {len(PROJECTS)} kartu proyek, 1 footer -> {OUT}/")
+print(f"{len(SECTIONS)} judul, 1 about, {len(STACK)} stack, {len(PROJECTS)} proyek, 1 footer -> {OUT}/")
