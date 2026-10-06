@@ -6,6 +6,10 @@ tagline. Berulang tanpa henti. Ubah NAME / TAGLINE / BITE lalu jalankan: python 
 """
 import math
 import random
+from functools import partial
+
+import pixelart
+from pixelart import CAT_COLORS, CAT_POSES, CAT_TOP, FONT, pixels, width
 
 NAME = "HADI PRASETIYO"
 TAGLINE = "> FULL-STACK SOFTWARE ENGINEER"
@@ -28,46 +32,7 @@ BUG_COLOR = "#f85149"  # merah = bug
 PLUS_COLOR = "#3fb950"  # hijau = +1 / beres
 ALERT_COLOR = "#d29922"
 HEART_COLOR = "#f778ba"
-
-FONT = {
-    "A": ".###. #...# #...# ##### #...# #...# #...#",
-    "B": "####. #...# #...# ####. #...# #...# ####.",
-    "C": ".###. #...# #.... #.... #.... #...# .###.",
-    "D": "####. #...# #...# #...# #...# #...# ####.",
-    "E": "##### #.... #.... ####. #.... #.... #####",
-    "F": "##### #.... #.... ####. #.... #.... #....",
-    "G": ".###. #...# #.... #.### #...# #...# .####",
-    "H": "#...# #...# #...# ##### #...# #...# #...#",
-    "I": "### .#. .#. .#. .#. .#. ###",
-    "J": "..## ...# ...# ...# #..# #..# .##.",
-    "K": "#...# #..#. #.#.. ##... #.#.. #..#. #...#",
-    "L": "#.... #.... #.... #.... #.... #.... #####",
-    "M": "#...# ##.## #.#.# #.#.# #...# #...# #...#",
-    "N": "#...# #...# ##..# #.#.# #..## #...# #...#",
-    "O": ".###. #...# #...# #...# #...# #...# .###.",
-    "P": "####. #...# #...# ####. #.... #.... #....",
-    "Q": ".###. #...# #...# #...# #.#.# #..#. .##.#",
-    "R": "####. #...# #...# ####. #.#.. #..#. #...#",
-    "S": ".#### #.... #.... .###. ....# ....# ####.",
-    "T": "##### ..#.. ..#.. ..#.. ..#.. ..#.. ..#..",
-    "U": "#...# #...# #...# #...# #...# #...# .###.",
-    "V": "#...# #...# #...# #...# #...# .#.#. ..#..",
-    "W": "#...# #...# #...# #.#.# #.#.# ##.## #...#",
-    "X": "#...# #...# .#.#. ..#.. .#.#. #...# #...#",
-    "Y": "#...# #...# .#.#. ..#.. ..#.. ..#.. ..#..",
-    "Z": "##### ....# ...#. ..#.. .#... #.... #####",
-    "1": ".#. ##. .#. .#. .#. .#. ###",
-    "+": "..... ..#.. ..#.. ##### ..#.. ..#.. .....",
-    " ": "... ... ... ... ... ... ...",
-    ">": "#... .#.. ..#. ...# ..#. .#.. #...",
-    "/": "....# ...#. ...#. ..#.. .#... .#... #....",
-    "-": "... ... ... ### ... ... ...",
-    ".": ". . . . . . #",
-    "·": ". . . # . . .",
-}
-for ch, glyph in FONT.items():
-    rows = glyph.split()
-    assert len(rows) == 7 and len({len(row) for row in rows}) == 1, f"glyph {ch!r} rusak"
+sprite = partial(pixelart.sprite, px=PX)
 
 # ---------------------------------------------------------------- sprite (menghadap kanan)
 DEV_COLORS = {"B": "#d2a8ff", "b": "#a371f7", "S": "#f2cfa8", "E": "#0d1117",
@@ -86,14 +51,6 @@ DEV_POSES = {
 TYPING = ["sit_a", "sit_b"]
 CHAIR = ["CC", "CC", "CC", "CC", "CC", "CC", "CC", "CC", "CCCCCCCCC", ".C.....C.", ".C.....C."]  # sejajar baris 4..14 pose duduk
 
-CAT_COLORS = {"#": "#c9d1d9", "E": "#0d1117", "n": "#f2a6b8", "-": "#6e7681"}
-CAT_TOP = ["#.....#...#", "#.....#####", "#.....#E#E#", ".#....##n##", "..#########", "..########."]
-CAT_POSES = {"stand": CAT_TOP + ["..#.#..#.#."],
-             "a": CAT_TOP + [".#..#...#.#"],
-             "b": CAT_TOP + ["...#.#.#.#."],
-             "sleep": ["...........", "......#...#", "......#####", "......#-#-#",
-                       "......##n##", "..#########", ".#########."]}
-
 BUG_COLORS = {"#": BUG_COLOR, "w": "#c9d1d9"}
 BUG_WALK = ["#...#", ".###.", "#####", ".###.", "#.#.#"]
 BUG_POSES = {"stand": BUG_WALK, "a": BUG_WALK, "b": ["#...#", ".###.", ".###.", "#####", ".#.#."],
@@ -108,37 +65,6 @@ MUG = ["MMMM.", "MMMMM", "MMMMM", "MMMM."]
 
 CSS = []  # semua @keyframes dikumpulkan di sini
 
-
-def width(text):
-    return sum(len(FONT[ch].split()[0]) + 1 for ch in text) - 1
-
-
-def pixels(text):
-    """(kolom, baris, index huruf) tiap piksel yang menyala."""
-    col = 0
-    for i, ch in enumerate(text):
-        rows = FONT[ch].split()
-        for r, row in enumerate(rows):
-            for c, bit in enumerate(row):
-                if bit == "#":
-                    yield col + c, r, i
-        col += len(rows[0]) + 1
-
-
-def sprite(rows, colors, x=0, y=None, px=PX):
-    """Gambar sprite sebagai rect per deretan warna yang sama; default kaki di y=0."""
-    y = -len(rows) * px if y is None else y
-    out = []
-    for r, row in enumerate(rows):
-        c = 0
-        while c < len(row):
-            run = 1
-            while c + run < len(row) and row[c + run] == row[c]:
-                run += 1
-            if row[c] in colors:
-                out.append(f'<rect x="{x + c * px:g}" y="{y + r * px:g}" width="{run * px}" height="{px}" fill="{colors[row[c]]}"/>')
-            c += run
-    return "".join(out)
 
 
 def keyframes(name, points, dur):
@@ -407,7 +333,7 @@ cat_h = len(CAT_POSES["stand"]) * PX
 tail_tips = "".join(f'<rect x="0" y="{r * PX - cat_h}" width="{PX}" height="{PX}" fill="{CAT_COLORS["#"]}" '
                     f'opacity="{1 - k}" style="animation:swap{k} 1.6s step-end infinite"/>' for k, r in enumerate([6, 5]))
 zzz = "".join(f'<g opacity="0" style="animation:zz 3s linear {k}s infinite">'
-              f'{sprite(ZZZ, {"#": "#8b949e"}, 10 * PX, -9 * PX, PX - 1)}</g>' for k in range(3))
+              f'{sprite(ZZZ, {"#": "#8b949e"}, 10 * PX, -9 * PX, px=PX - 1)}</g>' for k in range(3))
 asleep = [(0, t_out + 0.1), (t_home + 0.4, t_keys), (t_off_keys + 0.4, PERIOD)]
 z_intro = f"{keyframes('zi', opacity_points([(cat_done, None)]), cat_done + 1)} {cat_done + 1:.3f}s step-end both"
 z_loop = loop_anim("zl", opacity_points(asleep), "step-end")

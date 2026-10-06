@@ -9,7 +9,7 @@
   <a href="https://instagram.com/hadiiprasetiyo"><img src="https://img.shields.io/badge/Instagram-161b22?style=for-the-badge&logo=instagram&logoColor=d2a8ff" alt="Instagram" /></a>
 </p>
 
-### About
+<h3><img src="assets/header-about.svg" width="100%" alt="About" /></h3>
 
 ```js
 const hadi = {
@@ -23,7 +23,7 @@ const hadi = {
 };
 ```
 
-### Tech Stack
+<h3><img src="assets/header-stack.svg" width="100%" alt="Tech Stack" /></h3>
 
 <table>
   <tr>
@@ -44,20 +44,26 @@ const hadi = {
   </tr>
 </table>
 
-### Featured Projects
+<h3><img src="assets/header-projects.svg" width="100%" alt="Featured Projects" /></h3>
 
-| Project | What it does | Stack |
-| :-- | :-- | :-- |
-| **[portfolio-v2](https://github.com/hadiprasetiyo/portfolio-v2)** | Personal portfolio with an animated UI and a secure contact form · [live ↗](https://hadiprasetiyo.my.id) | React · Vite · Framer Motion · Express |
-| **[task-tracker](https://github.com/hadiprasetiyo/task-tracker)** | Task management app with status filtering, a statistics endpoint, and a Docker Compose setup | FastAPI · React · PostgreSQL · Docker |
-| **[skybarbershop](https://github.com/hadiprasetiyo/skybarbershop)** | Barbershop booking system with queue scheduling, service catalog, and admin dashboard | Laravel · PHP |
-| **[SneaksAvenue](https://github.com/hadiprasetiyo/SneaksAvenue)** | E-commerce platform for international sneaker brands, with auth and product management | Laravel 11 · PHP |
+<p align="center">
+  <a href="https://github.com/hadiprasetiyo/portfolio-v2"><img src="assets/project-portfolio-v2.svg" width="49%" alt="portfolio-v2: personal portfolio built with React, Vite, Framer Motion and Express" /></a>
+  <a href="https://github.com/hadiprasetiyo/task-tracker"><img src="assets/project-task-tracker.svg" width="49%" alt="task-tracker: task management app built with FastAPI, React, PostgreSQL and Docker" /></a>
+  <a href="https://github.com/hadiprasetiyo/skybarbershop"><img src="assets/project-skybarbershop.svg" width="49%" alt="skybarbershop: barbershop booking system built with Laravel" /></a>
+  <a href="https://github.com/hadiprasetiyo/SneaksAvenue"><img src="assets/project-sneaksavenue.svg" width="49%" alt="SneaksAvenue: sneaker e-commerce platform built with Laravel 11" /></a>
+</p>
 
-<br />
+<h3><img src="assets/header-activity.svg" width="100%" alt="Activity" /></h3>
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/hadiprasetiyo/hadiprasetiyo/output/github-contribution-grid-snake-dark.svg" />
     <img alt="Snake eating my GitHub contributions" src="https://raw.githubusercontent.com/hadiprasetiyo/hadiprasetiyo/output/github-contribution-grid-snake.svg" />
   </picture>
+</p>
+
+<br />
+
+<p align="center">
+  <img src="assets/footer.svg" width="100%" alt="Thanks for visiting" />
 </p>
